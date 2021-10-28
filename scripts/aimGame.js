@@ -119,6 +119,8 @@ function setup() {
 	button.position(buttonPos.x, buttonPos.y);
 	button.mousePressed(startGame);
 	
+	alert(button.elt.firstChild.data);
+	
 	// Wait until draw	
 	noLoop();
 }
@@ -128,13 +130,7 @@ function draw() {
 	// Frame setup and first update
 	background(COLOR_BACKGROUND);
 	
-	if (boolPlay) {
-		txtButton = "Stop";
-		drawButton();
-	} else {
-		txtButton = "Start";
-		drawButton();
-	}
+	drawButton();
 }
 
 	//Current program
@@ -147,10 +143,14 @@ function mouseClicked() {
 }
 
 function drawButton() {
-	button.remove();
-	button = createButton(txtButton);
-	button.position(buttonPos.x, buttonPos.y);
-	button.mousePressed(startGame);
+	
+	if (boolPlay) {
+		txtButton = "Stop";
+	} else {
+		txtButton = "Start";
+	}
+	
+	button.elt.firstChild.data = txtButton;
 }
 
 function startGame() {
