@@ -104,6 +104,8 @@ let   boolPlay = false;
 let   button;
 let   buttonPos;
 let   txtButton = 'Start';
+let   maxRadius = 20;
+let   minRadius = 1;
 	// Colors
 const COLOR_BACKGROUND = 70;
 
@@ -119,7 +121,7 @@ function setup() {
 	button.position(buttonPos.x, buttonPos.y);
 	button.mousePressed(startGame);
 	
-	alert(button.elt.firstChild.data);
+	//alert(button.elt.firstChild.data);
 	
 	// Wait until draw	
 	noLoop();
@@ -131,15 +133,73 @@ function draw() {
 	background(COLOR_BACKGROUND);
 	
 	drawButton();
+	drawText();
+	
 }
 
 	//Current program
+	
+let target = {
+	
+	get isGrow() {
+		return this._isGrow;
+	}	
+	set isGrow(value) {
+		_isGrow = Boolean(value);
+	}
+	
+	get position() {
+		return [this._x, this._y];
+	}
+	set position(x, y) {
+		if (x || y) {
+			return;
+		}
+		_x = +x;
+		_y = +y;		
+	}
+	
+	get radius() {
+		return this._radius;
+	}	
+	set radius(value) {
+		if (value) {
+			return;
+		}
+		_radius = +value;
+	}
+	
+	function drawTarget() {
+		
+	}
+	
+}
+
+let missgert = {
+	__proto__: target;
+	
+	function drawMissgert() {
+		
+	}
+	
+}
+
 function mouseClicked() {
 	// Has been game started?	
 	if (!boolPlay) return;
 	// Yes, already started!	
 	
-	loop();
+	if (checkHit()) {
+		// Hit!
+		
+	} else {
+		//Miss...
+		
+	}
+}
+
+function checkHit() {
+
 }
 
 function drawButton() {
@@ -148,15 +208,13 @@ function drawButton() {
 		txtButton = "Stop";
 	} else {
 		txtButton = "Start";
-	}
-	
+	}	
 	button.elt.firstChild.data = txtButton;
 }
 
 function startGame() {
-	if (!boolPlay) {
-		
-	}
+	
 	boolPlay = !boolPlay;
+	loop();
 	
 }
